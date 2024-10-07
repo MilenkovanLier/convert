@@ -1,7 +1,13 @@
-
 const dropArea = document.getElementById('drop-area');
-const fileListElement = document.getElementById('fileList'); // Correct reference to fileList
-const filesToConvert = []; // Array to hold the files to be converted
+const fileListElement = document.getElementById('fileList');
+const filesToConvert = [];
+const qualityControl = document.getElementById('quality');
+const qualityValueDisplay = document.getElementById('qualityValue');
+
+// Update displayed quality value when slider changes
+qualityControl.addEventListener('input', () => {
+    qualityValueDisplay.textContent = qualityControl.value;
+});
 
 // Prevent default behavior (Prevent file from being opened)
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -9,11 +15,8 @@ const filesToConvert = []; // Array to hold the files to be converted
     document.body.addEventListener(eventName, preventDefaults, false);
 });
 
-// Highlight the drop area when item is dragged over it
 dropArea.addEventListener('dragover', () => dropArea.classList.add('hover'));
 dropArea.addEventListener('dragleave', () => dropArea.classList.remove('hover'));
-
-// Handle dropped files
 dropArea.addEventListener('drop', handleDrop, false);
 
 function preventDefaults(e) {
@@ -32,28 +35,21 @@ function handleFiles(files) {
         filesToConvert.push(files[i]);
         const listItem = document.createElement('li');
         
-        // Create file name text
         const fileName = document.createElement('span');
         fileName.textContent = files[i].name;
         
-        // Create delete button
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
         deleteBtn.className = 'delete-btn';
         deleteBtn.addEventListener('click', () => {
-            // Remove file from the filesToConvert array
             filesToConvert.splice(i, 1);
-            // Remove the list item from the DOM
             listItem.remove();
-            alert(`File ${files[i].name} has been removed.`);
         });
         
         listItem.appendChild(fileName);
         listItem.appendChild(deleteBtn);
         fileListElement.appendChild(listItem);
     }
-
-    alert(`${filesToConvert.length} files added. Press 'Convert' to process them.`);
 }
 
 document.getElementById('convertBtn').addEventListener('click', () => {
@@ -67,9 +63,8 @@ document.getElementById('convertBtn').addEventListener('click', () => {
         formData.append('files[]', filesToConvert[i]);
     }
 
-    // Disable convert button while processing
-    document.getElementById('convertBtn').disabled = true;
-    document.getElementById('convertBtn').textContent = 'Converting...';
+    // Add the selected quality to the form data
+    formData.append('quality', qualityControl.value);
 
     fetch('/upload', {
         method: 'POST',
@@ -88,10 +83,6 @@ document.getElementById('convertBtn').addEventListener('click', () => {
     .catch(err => {
         console.error(err);
         alert("Error converting files.");
-    })
-    .finally(() => {
-        document.getElementById('convertBtn').disabled = false;
-        document.getElementById('convertBtn').textContent = 'Convert';
     });
 });
 

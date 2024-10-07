@@ -41,29 +41,22 @@
 import os
 from PIL import Image
 
-def convert_images_to_webp(source_folder, target_folder, max_width=2000):
-    # Create target folder if it doesn't exist
+def convert_images_to_webp(source_folder, target_folder, quality=80):
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
 
-    converted_count = 0  # Initialize counter for converted images
+    converted_count = 0
 
-    # Loop through all files in the source folder
     for filename in os.listdir(source_folder):
-        if filename.endswith(".png") or filename.endswith(".tiff") or filename.endswith(".tif") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
-            # Build full file path
+        if filename.endswith((".png", ".tiff", ".tif", ".jpg", ".jpeg")):
             input_path = os.path.join(source_folder, filename)
             output_filename = os.path.splitext(filename)[0] + ".webp"
             output_path = os.path.join(target_folder, output_filename)
 
-            # Open the image
             with Image.open(input_path) as img:
-                # Resize if needed and save as WebP
-                # (Include your resizing code here)
-
-                img.save(output_path, 'webp', quality=80)
+                img.save(output_path, 'webp', quality=quality)  # Pass the quality parameter here
 
             print(f"Converted: {filename} -> {output_filename}")
-            converted_count += 1  # Increment counter
+            converted_count += 1
 
-    return converted_count  # Return the count of converted images
+    return converted_count

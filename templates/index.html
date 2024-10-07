@@ -13,10 +13,19 @@
         <input type="file" id="fileElem" multiple accept=".png,.jpg,.jpeg,.tiff,.tif" style="display:none;">
         <label for="fileElem" style="cursor: pointer;">Select files</label>
     </div>
-    <div class="container_list">
-        <ul id="fileList"></ul> <!-- List for displaying added files -->
-        <button id="convertBtn">Convert</button>
+
+    <ul id="fileList"></ul> <!-- List for displaying added files -->
+    
+    <!-- Quality control slider -->
+    <div id="quality-control">
+        <label for="quality">Select Quality (0-100):</label>
+        <input type="range" id="quality" name="quality" min="1" max="100" value="80">
+        <span id="qualityValue">80</span>
     </div>
+
+
+    <button id="convertBtn">Convert</button>
+
     
     <div id="downloadBtn">
         <p>Files converted successfully!</p>
