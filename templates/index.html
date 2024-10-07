@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to WebP Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Correct CSS path -->
+</head>
+<body>
+    <h1>Image to WebP Converter</h1>
+    <div id="drop-area">
+        <p>Drag and drop images here (PNG, JPG, TIFF)</p>
+        <input type="file" id="fileElem" multiple accept=".png,.jpg,.jpeg,.tiff,.tif" style="display:none;">
+        <label for="fileElem" style="cursor: pointer;">Select files</label>
+    </div>
+    <div class="container_list">
+        <ul id="fileList"></ul> <!-- List for displaying added files -->
+        <button id="convertBtn">Convert</button>
+    </div>
+    
+    <div id="downloadBtn">
+        <p>Files converted successfully!</p>
+        <a id="downloadLink" href="#">Download Converted Files</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Link to the external JavaScript file -->
+    
+</body>
+</html>
