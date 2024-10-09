@@ -41,7 +41,7 @@
 import os
 from PIL import Image
 
-def convert_images_to_webp(source_folder, target_folder, quality=80):
+def convert_images_to_webp(source_folder, target_folder, quality=100):
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
 
