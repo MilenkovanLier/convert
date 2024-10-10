@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Register</h2>
-    <form method="POST" action="{{ url_for('register') }}">
+    <form method="POST" action="{{ url_for('user_routes.register') }}">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" required>
         

@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Login</h2>
-    <form method="POST" action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('user_routes.login') }}">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" required>
         
