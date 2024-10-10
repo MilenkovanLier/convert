@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+    <h2>Account</h2>
+    <form method="POST" action="{{ url_for('account') }}">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" value="{{ user.username }}" required>
+        
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{ user.email }}" required>
+        
+        <button type="submit">Update Account</button>
+    </form>
+{% endblock %}
